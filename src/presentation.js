@@ -35,6 +35,64 @@ const theme = createTheme(
   }
 );
 
+const initialJsSource = `
+import React, {Component} from 'react';
+import gigs from './data/GigList';
+import Gig from './components/Gig';
+
+const GigList = () => gigs.map((props) => <Gig {...props}/>)
+
+const Gig = ({link, date, location}) => (
+  <tr>
+    <a href={link} target="_blank">
+      <td className="gigDate">{date}</td>
+      <td className="gigLocation">{location}</td>
+    </a>
+  </tr>
+);
+
+export default GigList;
+`;
+
+const finalJsSource = `
+import React, {useState, useEffect} from 'react';
+
+const url = 'https://api.thescratch.ie/';
+const request = {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json"
+  }
+};
+
+const GigList = () => {
+  const [gigListData, setGigListData] = useState([]);
+
+  useEffect(() => {
+    if (!gigListData.length) {
+      (async () => {
+        let response = await fetch(url, request);
+        let json = await response.json();
+        setGigListData(json.Items)
+      })();
+    }
+  });
+
+  return gigListData.length ? gigListData.map((props) => <Gig {...props}/>) : <h2>...Loading</h2>
+}
+
+const Gig = ({link, date, location}) => (
+  <tr>
+    <a href={link} target="_blank">
+      <td className="gigDate">{date}</td>
+      <td className="gigLocation">{location}</td>
+    </a>
+  </tr>
+);
+
+export default GigList;
+`;
+
 export default class Presentation extends React.Component {
   render() {
     return (
@@ -78,6 +136,7 @@ export default class Presentation extends React.Component {
             <a href="https://thescratch.ie" target="_blank">thescratch.ie</a>
           </Text>
         </Slide>
+
         <Slide transition={['fade']} bgColor="tertiary">
           <Heading size={2} fit caps lineHeight={1} textColor="secondary">
             Part 1: The React Bit
@@ -103,6 +162,21 @@ export default class Presentation extends React.Component {
             <ListItem>Gig List</ListItem>
           </List>
         </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Gig List Component
+          </Heading>
+          <List>
+            <Image src='./gigList.png'></Image>
+          </List>
+        </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Gig List Component
+          </Heading>
+          <CodePane source={initialJsSource} lang={'javascript'}></CodePane>
+        </Slide>
+
         <Slide transition={['fade']} bgColor="tertiary">
           <Heading size={2} fit caps lineHeight={1} textColor="secondary">
             Interlude: Why Serverless
@@ -114,25 +188,108 @@ export default class Presentation extends React.Component {
           </Heading>
           <Image src='./rte.jpg'></Image>
         </Slide>
-        <Slide transition={['fade']} bgColor="tertiary">
+        <Slide transition={['fade']} bgColor="primary">
           <Heading size={2} fit caps lineHeight={1} textColor="secondary">
-            Part 1: The React Bit - continued
+            Updated Gig List Component
           </Heading>
+          <CodePane source={finalJsSource} lang={'javascript'}></CodePane>
         </Slide>
+
         <Slide transition={['fade']} bgColor="tertiary">
           <Heading size={2} fit caps lineHeight={1} textColor="secondary">
             Part 2: Serverless on AWS
           </Heading>
         </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            LinkedIn Learning Course
+          </Heading>
+          <Image src='./lynda.png'></Image>
+        </Slide>
+
+        <Slide>
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Built GET and POST API Endpoints for Gigs
+          </Heading>
+          <List>
+            <ListItem>DynamoDB</ListItem>
+            <ListItem>AWS Lambda</ListItem>
+            <ListItem>API Gateway</ListItem>
+          </List>
+        </Slide>
+
+        <Slide>
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Takeaways
+          </Heading>
+          <List>
+            <ListItem>Tedious to set up endpoints</ListItem>
+            <ListItem>Not clear on production workflow</ListItem>
+            <ListItem>Navigation AWS UI difficult</ListItem>
+          </List>
+        </Slide>
+
         <Slide transition={['fade']} bgColor="tertiary">
           <Heading size={2} fit caps lineHeight={1} textColor="secondary">
             Part 3: Serverless on Ruby
           </Heading>
         </Slide>
+
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Jets: Ruby Serverless Framework
+          </Heading>
+          <Image src='./jetsHomepage.png'></Image>
+        </Slide>
+
+        <Slide>
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Jets: Ruby Serverless Framework
+          </Heading>
+          <List>
+            <ListItem>Very like Ruby on Rails</ListItem>
+            <ListItem>Deploys Seamlessly to AWS</ListItem>
+            <ListItem>Seems popular (1000+ Github stars)</ListItem>
+          </List>
+        </Slide>
+
+        <Slide>
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Takeaways
+          </Heading>
+          <List>
+            <ListItem>Jets not yet fully formed</ListItem>
+            <ListItem>Distinction between ActiveRecord and DynamoDB is unclear</ListItem>
+            <ListItem>Github stars != Production Ready</ListItem>
+          </List>
+        </Slide>
+
         <Slide transition={['fade']} bgColor="tertiary">
           <Heading size={2} fit caps lineHeight={1} textColor="secondary">
             Epilogue: What did I learn?
           </Heading>
+        </Slide>
+
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Serverless Use Cases
+          </Heading>
+          <List>
+            <ListItem>High scalability situations</ListItem>
+            <ListItem>Service Oriented Architecture</ListItem>
+            <ListItem>Where Economics makes sense</ListItem>
+          </List>
+        </Slide>
+
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Advice
+          </Heading>
+          <List>
+            <ListItem>Pick a strong front end framework</ListItem>
+            <ListItem>Pick a mature backend framework (Serverless 30,000+ stars!)</ListItem>
+            <ListItem>Experiment on lower risk projects first</ListItem>
+          </List>
         </Slide>
       </Deck>
     );
