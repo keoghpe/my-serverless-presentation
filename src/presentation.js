@@ -9,9 +9,11 @@ import {
   Heading,
   ListItem,
   List,
+  Image,
   Quote,
   Slide,
   Text,
+  CodePane
 } from 'spectacle';
 
 // Import theme
@@ -43,51 +45,94 @@ export default class Presentation extends React.Component {
       >
         <Slide transition={['zoom']} bgColor="primary">
           <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Spectacle Boilerplate
+            Serverless React
           </Heading>
-          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            open the presentation/index.js file to get started
+          <Text margin="10px 0 0" textColor="tertiary" size={6} fit bold>
+            A talk in 3 parts
           </Text>
         </Slide>
         <Slide transition={['fade']} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>
-            Typography
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Introduction: A Story
           </Heading>
-          <Heading size={1} textColor="secondary">
-            Heading 1
+        </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Rockstar Developer
           </Heading>
-          <Heading size={2} textColor="secondary">
-            Heading 2
+        </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Rockstar
           </Heading>
-          <Heading size={3} textColor="secondary">
-            Heading 3
+          <Image src='./rockstar.jpg'></Image>
+        </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Developer
           </Heading>
-          <Heading size={4} textColor="secondary">
-            Heading 4
-          </Heading>
-          <Heading size={5} textColor="secondary">
-            Heading 5
-          </Heading>
-          <Text size={6} textColor="secondary">
-            Standard text
+          <Image src='./proffeature1.jpg'></Image>
+        </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Text margin="10px 0 0" textColor="tertiary" size={6} fit bold>
+            <a href="https://thescratch.ie" target="_blank">thescratch.ie</a>
           </Text>
         </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
-          <Heading size={6} textColor="secondary" caps>
-            Standard List
+        <Slide transition={['fade']} bgColor="tertiary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Part 1: The React Bit
+          </Heading>
+        </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            React
           </Heading>
           <List>
-            <ListItem>Item 1</ListItem>
-            <ListItem>Item 2</ListItem>
-            <ListItem>Item 3</ListItem>
-            <ListItem>Item 4</ListItem>
+            <ListItem>Component Based Web Library</ListItem>
+            <ListItem>Developed by Facebook (used by Airbnb, Instagram, many others)</ListItem>
+            <ListItem>Used for developing websites and mobile apps (react native)</ListItem>
           </List>
         </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
-          <BlockQuote>
-            <Quote>Example Quote</Quote>
-            <Cite>Author</Cite>
-          </BlockQuote>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            thescratch.ie Components
+          </Heading>
+          <List>
+            <ListItem>Youtube Video</ListItem>
+            <ListItem>Spotify Playlist</ListItem>
+            <ListItem>Gig List</ListItem>
+          </List>
+        </Slide>
+        <Slide transition={['fade']} bgColor="tertiary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Interlude: Why Serverless
+          </Heading>
+        </Slide>
+        <Slide transition={['fade']} bgColor="primary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            The Scratch in RTE
+          </Heading>
+          <Image src='./rte.jpg'></Image>
+        </Slide>
+        <Slide transition={['fade']} bgColor="tertiary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Part 1: The React Bit - continued
+          </Heading>
+        </Slide>
+        <Slide transition={['fade']} bgColor="tertiary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Part 2: Serverless on AWS
+          </Heading>
+        </Slide>
+        <Slide transition={['fade']} bgColor="tertiary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Part 3: Serverless on Ruby
+          </Heading>
+        </Slide>
+        <Slide transition={['fade']} bgColor="tertiary">
+          <Heading size={2} fit caps lineHeight={1} textColor="secondary">
+            Epilogue: What did I learn?
+          </Heading>
         </Slide>
       </Deck>
     );
